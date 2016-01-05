@@ -18,13 +18,21 @@ public class ParserController {
     @Autowired
     private ParserDao parserDao;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/",  produces = "application/json; charset=utf-8")
-    public String parse() {
+	@RequestMapping(method = RequestMethod.GET, value = "/sjvacancy",  produces = "application/json; charset=utf-8")
+    public String vacancyParse() {
         return util.toJson(parserDao.parseFromSuperJob());
+	}
+    @RequestMapping(method = RequestMethod.GET, value = "/sjcategory",  produces = "application/json; charset=utf-8")
+    public String categoryParse() {
+        return util.toJson(parserDao.parseCategorySuperJob());
 	}
     @RequestMapping(method = RequestMethod.GET, value = "/write")
     public void write() {
-        parserDao.writeDataToDb();
+        parserDao.writeSJVacancyToDb();
+	}
+    @RequestMapping(method = RequestMethod.GET, value = "/writecategory")
+    public void writeCategory() {
+        parserDao.writeSJCategoryToDb();
 	}
 
 

@@ -9,5 +9,7 @@ import java.util.Map;
 public interface ParserDao{
 
     List<Map<String, Object>> parseFromSuperJob();
-    void writeDataToDb();
+    void writeSJVacancyToDb();
+    public List<Map<String, Object>> parseCategorySuperJob();
+    public void writeSJCategoryToDb();
 }
