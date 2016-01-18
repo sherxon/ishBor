@@ -37,4 +37,9 @@ public class CategoryDaoImpl implements CategoryDao{
     public Map<String, Object> create(Map<String, Object> data) {
         return null;
     }
+
+    @Override
+    public Map<String, Object> list(Integer id) {
+        return null;
+    }
 }

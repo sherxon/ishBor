@@ -12,4 +12,5 @@ public interface CategoryDao{
     void delete(Long id);
     Map<String, Object> create(Map<String, Object> data);
 
+    Map<String, Object> list(Integer id);
 }
