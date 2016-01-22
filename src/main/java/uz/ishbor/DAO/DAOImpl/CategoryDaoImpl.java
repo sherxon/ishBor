@@ -18,7 +18,7 @@ public class CategoryDaoImpl implements CategoryDao{
 
     @Override
     public List<Map<String, Object>> list() {
-        List<Map<String, Object>> list=jdbcTemplate.queryForList("SELECT * FROM raw_category");
+        List<Map<String, Object>> list=jdbcTemplate.queryForList("SELECT cat_name as title, cat_link as link FROM raw_category");
         if(list.isEmpty())list= Collections.emptyList();
         return list;
     }

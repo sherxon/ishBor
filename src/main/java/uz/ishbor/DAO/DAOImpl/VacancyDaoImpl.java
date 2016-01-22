@@ -20,13 +20,13 @@ public class VacancyDaoImpl implements VacancyDao{
 
     @Override
     public List<Map<String, Object>> getList() {
-        String sql="SELECT * FROM raw_vacancy";
+        String sql="SELECT * FROM raw_vacancy ";
         return jdbcTemplate.queryForList(sql);
     }
 
     @Override
     public List<Map<String, Object>> getList(Integer categoryId) {
-        String sql="SELECT * FROM raw_vacancy WHERE category_id="+categoryId;
+        String sql="SELECT st_price as price, company_name as \"companyName\", vac_position  as position, descc, st_date as \"stDate\", category_id as \"categoryId\" FROM raw_vacancy WHERE category_id="+categoryId;
         return jdbcTemplate.queryForList(sql);
     }
 
