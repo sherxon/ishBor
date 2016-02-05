@@ -25,6 +25,7 @@ public class SearchController {
     @Autowired private JdbcTemplate jdbcTemplate;
 
 
+
     @RequestMapping(value = "/tag/{query}", produces = "application/json; charset=utf-8")
     public String searchTag(@PathVariable String query){
         String sql="select id, name as word from tag where name ilike '%"+query+"%' limit 5 ";
