@@ -11,5 +11,7 @@ public interface VacancyDao {
     String upsert(Map<String, Object> vacancy);
     String delete(Integer id);
 
-    List<Map<String, Object>> find(Integer vid);
+    Map<String, Object> find(Integer vid);
+
+    List searchByTag(String tag);
 }

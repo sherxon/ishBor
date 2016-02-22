@@ -26,7 +26,7 @@ public class VacancyDaoImpl implements VacancyDao{
 
     @Override
     public List<Map<String, Object>> getList(Integer categoryId) {
-        String sql="SELECT st_price as price, company_name as \"companyName\", vac_position  as position, descc, st_date as \"stDate\", category_id as \"categoryId\" FROM raw_vacancy WHERE category_id="+categoryId;
+        String sql="SELECT id,  st_price as price, company_name as \"companyName\", vac_position  as position, descc, st_date as \"stDate\", category_id as \"categoryId\" FROM raw_vacancy WHERE category_id="+categoryId;
         return jdbcTemplate.queryForList(sql);
     }
 
@@ -41,7 +41,16 @@ public class VacancyDaoImpl implements VacancyDao{
     }
 
     @Override
-    public List<Map<String, Object>> find(Integer vid) {
-        return null;
+    public Map<String, Object> find(Integer vid) {
+        String sql="SELECT * from raw_vacancy where id="+vid;
+       return jdbcTemplate.queryForMap(sql);
+    }
+
+    @Override
+    public List searchByTag(String tag) {
+        String sql="SELECT st_price as price, company_name as \"companyName\", vac_position  as position, descc, st_date as \"stDate\" FROM raw_vacancy WHERE vac_position like '%"+tag+"%' or company_name like '%"+tag+"%' " +
+                " group by company_name, vac_position, st_price, descc, st_date";
+        List<Map<String, Object>> data= jdbcTemplate.queryForList(sql);
+        return data;
     }
 }

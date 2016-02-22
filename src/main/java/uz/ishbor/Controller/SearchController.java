@@ -34,6 +34,7 @@ public class SearchController {
        return util.toJson(data);
     }
 
+
     private static class TagAdder extends Thread{
        private String tag;
         private JdbcTemplate jdbcTemplate;

@@ -14,7 +14,9 @@ import java.util.Map;
  */
 @Repository
 public class CategoryDaoImpl implements CategoryDao{
-    @Autowired private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public List<Map<String, Object>> list() {
