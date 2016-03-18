@@ -14,4 +14,7 @@ public interface VacancyDao {
     Map<String, Object> find(Integer vid);
 
     List searchByTag(String tag);
+
+    List getLatest();
+
 }

@@ -23,6 +23,7 @@ import java.util.Map;
 @RequestMapping(value = "/vacancy")
 public class VacancyController {
 
+
     @Autowired
     private Util util;
 
@@ -30,33 +31,41 @@ public class VacancyController {
     private VacancyDao vacancyDao;
 
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-    public String getList(HttpServletRequest request, HttpServletResponse response){
-        List list= Collections.emptyList();
+    public String getList(HttpServletRequest request, HttpServletResponse response) {
+        List list = Collections.emptyList();
         try {
-            Integer integer=Integer.parseInt(request.getParameter("categoryId"));
-            list=vacancyDao.getList(integer);
-        }catch (Exception e){
+            Integer integer = Integer.parseInt(request.getParameter("categoryId"));
+            list = vacancyDao.getList(integer);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return util.toJson(list);
     }
+
     @RequestMapping(value = "/list/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-    public String getVacancyInfor(@PathVariable Integer id){
-        List list=vacancyDao.getList(id);
+    public String getVacancyInfor(@PathVariable Integer id) {
+        List list = vacancyDao.getList(id);
         return util.toJson(list);
     }
 
     @RequestMapping(value = "/search/{tag}", produces = "application/json; charset=utf-8")
-    public String searchVacancy(@PathVariable String tag){
-        List list=vacancyDao.searchByTag(tag);
+    public String searchVacancy(@PathVariable String tag) {
+        List list = vacancyDao.searchByTag(tag);
+        return util.toJson(list);
+    }
+
+    @RequestMapping(value = "/latest", produces = "application/json; charset=utf-8")
+    public String latestVacancy() {
+        List list = vacancyDao.getLatest();
         return util.toJson(list);
     }
 
     @RequestMapping(value = "/html/{id}")
-    public ModelAndView searchVacancy(@PathVariable Integer id){
-        Map<String, Object> item=vacancyDao.find(id);
-        ModelMap modelMap=new ModelMap();
-        modelMap.put("item", vacancyDao);
+    public ModelAndView searchVacancy(@PathVariable Integer id) {
+        Map<String, Object> item = vacancyDao.find(id);
+        ModelMap modelMap = new ModelMap();
+        item.put("company_name", String.valueOf(item.get("company_name")).replace("\"", "'"));
+        modelMap.put("item", util.toJson(item));
         return new ModelAndView("jobdesc", modelMap);
     }
 

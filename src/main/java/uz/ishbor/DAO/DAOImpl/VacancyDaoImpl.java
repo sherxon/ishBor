@@ -48,9 +48,15 @@ public class VacancyDaoImpl implements VacancyDao{
 
     @Override
     public List searchByTag(String tag) {
-        String sql="SELECT st_price as price, company_name as \"companyName\", vac_position  as position, descc, st_date as \"stDate\" FROM raw_vacancy WHERE vac_position like '%"+tag+"%' or company_name like '%"+tag+"%' " +
+        String sql="SELECT id, st_price as price, company_name as \"companyName\", vac_position  as position, descc, st_date as \"stDate\" FROM raw_vacancy WHERE vac_position like '%"+tag+"%' or company_name like '%"+tag+"%' " +
                 " group by company_name, vac_position, st_price, descc, st_date";
         List<Map<String, Object>> data= jdbcTemplate.queryForList(sql);
         return data;
+    }
+
+    @Override
+    public List getLatest() {
+        String sql="SELECT id, st_price as price, company_name as \"companyName\", vac_position  as position, descc, st_date as \"stDate\" FROM raw_vacancy order by st_date desc limit 20";
+        return jdbcTemplate.queryForList(sql);
     }
 }
